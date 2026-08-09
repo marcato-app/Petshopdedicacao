@@ -63,7 +63,7 @@
   /* ---------- hero ---------- */
   .hero{
     position:relative;
-    padding:76px 0 0;
+    padding:56px 0 0;
     overflow:hidden;
   }
   .hero-inner{
@@ -73,31 +73,31 @@
     text-align:center;
     max-width:720px;
     margin:0 auto;
-    padding-bottom:76px;
+    padding-bottom:56px;
   }
   .hero-logo{
     height:120px;
     width:auto;
-    margin-bottom:36px;
+    margin-bottom:28px;
   }
   .eyebrow{
     display:inline-flex; align-items:center; gap:10px;
     font-weight:600; font-size:14px; letter-spacing:2.5px; text-transform:uppercase;
     color:var(--orange-deep);
-    margin-bottom:22px;
+    margin-bottom:18px;
   }
   .eyebrow::before{ content:''; width:26px; height:2px; background:var(--orange); }
   .hero h1{
-    font-size:clamp(42px,5.4vw,68px);
+    font-size:clamp(32px,5.4vw,68px);
     color:var(--graphite);
-    margin-bottom:24px;
+    margin-bottom:18px;
   }
   .hero h1 em{ font-style:normal; color:var(--green); }
   .hero p.lead{
-    font-size:19px; line-height:1.6; color:var(--graphite-soft);
-    max-width:520px; margin:0 auto 34px;
+    font-size:17px; line-height:1.55; color:var(--graphite-soft);
+    max-width:520px; margin:0 auto 26px;
   }
-  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .hero-ctas{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
 
   .btn{
     display:inline-flex; align-items:center; gap:10px;
@@ -117,7 +117,17 @@
   .btn svg{ width:19px; height:19px; flex-shrink:0; }
 
   @media(max-width:900px){
-    .hero-logo{ height:90px; margin-bottom:26px; }
+    .hero-logo{ height:74px; margin-bottom:18px; }
+    .hero{ padding:40px 0 0; }
+    .hero-inner{ padding-bottom:40px; }
+  }
+  @media(max-width:600px){
+    .hero h1{ font-size:30px; margin-bottom:14px; }
+    .hero p.lead{ font-size:15.5px; margin-bottom:22px; }
+    .eyebrow{ font-size:12px; letter-spacing:2px; margin-bottom:14px; }
+    .btn{ padding:13px 22px; font-size:14.5px; }
+    .hero-ctas{ flex-wrap:nowrap; width:100%; }
+    .hero-ctas .btn{ flex:1; padding:13px 10px; justify-content:center; white-space:nowrap; }
   }
 
   /* service tags — pulled straight from the shop's real signage */
@@ -140,8 +150,13 @@
   }
   .service-item svg{ width:22px; height:22px; color:var(--green); flex-shrink:0; }
   @media(max-width:600px){
-    .services-row{ gap:10px; padding:20px 0; }
-    .service-item{ padding:10px 18px; font-size:14px; }
+    .services-row{ gap:8px; padding:16px 0; flex-wrap:nowrap; }
+    .service-item{ padding:9px 12px; font-size:12.5px; gap:6px; white-space:nowrap; }
+    .service-item svg{ width:17px; height:17px; }
+  }
+  @media(max-width:360px){
+    .services-row{ gap:6px; }
+    .service-item{ padding:8px 9px; font-size:11.5px; }
   }
 
   /* ---------- units section ---------- */
