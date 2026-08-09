@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DedicaÇÃO Pet Shop</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+  :root{
+    --cream:#fdfbf5;
+    --graphite:#32393f;
+    --graphite-soft:#5c646b;
+    --orange:#e8963c;
+    --orange-deep:#cf7f28;
+    --green:#7cb342;
+    --green-deep:#649a2e;
+    --brick:#a8623f;
+    --whatsapp:#25d366;
+    --line: rgba(50,57,63,0.12);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Work Sans', sans-serif;
+    background:var(--cream);
+    color:var(--graphite);
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3{ font-family:'Fredoka', sans-serif; font-weight:600; line-height:1.05; }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(253,251,245,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand img{ height:44px; width:auto; }
+  .brand .name{ font-family:'Fredoka'; font-weight:700; font-size:22px; color:var(--graphite); }
+  .brand .name span{ color:var(--green); }
+  .nav-links{ display:flex; gap:28px; font-weight:600; font-size:15px; }
+  .nav-links a{ color:var(--graphite-soft); transition:color .2s; }
+  .nav-links a:hover{ color:var(--orange-deep); }
+  .nav .insta{
+    display:flex; align-items:center; gap:8px;
+    font-weight:600; font-size:15px;
+    padding:9px 18px;
+    border:1.5px solid var(--graphite);
+    border-radius:30px;
+  }
+  @media(max-width:720px){ .nav-links{ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:76px 0 0;
+    overflow:hidden;
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+    padding-bottom:70px;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-weight:600; font-size:14px; letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--orange-deep);
+    margin-bottom:22px;
+  }
+  .eyebrow::before{ content:''; width:26px; height:2px; background:var(--orange); }
+  .hero h1{
+    font-size:clamp(42px,5.4vw,68px);
+    color:var(--graphite);
+    margin-bottom:24px;
+  }
+  .hero h1 em{ font-style:normal; color:var(--green); }
+  .hero p.lead{
+    font-size:19px; line-height:1.6; color:var(--graphite-soft);
+    max-width:460px; margin-bottom:34px;
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'Work Sans'; font-weight:600; font-size:16px;
+    padding:15px 28px; border-radius:14px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--graphite); color:#fff; }
+  .btn-primary:hover{ box-shadow:0 10px 24px rgba(50,57,63,0.28); }
+  .btn-outline{ border:1.5px solid var(--graphite); color:var(--graphite); }
+  .btn-outline:hover{ box-shadow:0 10px 24px rgba(50,57,63,0.12); }
+  .btn-wa{ background:var(--whatsapp); color:#fff; }
+  .btn-wa:hover{ box-shadow:0 10px 24px rgba(37,211,102,0.35); }
+  .btn-map{ border:1.5px solid var(--line); color:var(--graphite); background:#fff; }
+  .btn-map:hover{ box-shadow:0 8px 18px rgba(50,57,63,0.1); }
+  .btn svg{ width:19px; height:19px; flex-shrink:0; }
+
+  /* hero photo collage */
+  .collage{
+    position:relative;
+    height:460px;
+  }
+  .collage img{
+    position:absolute;
+    object-fit:cover;
+    border-radius:22px;
+    box-shadow:0 20px 44px rgba(50,57,63,0.22);
+  }
+  .collage .p1{ width:64%; height:78%; top:0; left:0; z-index:2; border:6px solid var(--cream); }
+  .collage .p1.logo-card{
+    background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    padding:36px;
+  }
+  .collage .p1.logo-card img{
+    position:static;
+    width:100%; height:100%;
+    object-fit:contain;
+    border-radius:0; box-shadow:none; border:none;
+  }
+  .collage .p2{ width:56%; height:60%; bottom:0; right:0; z-index:1; border:6px solid var(--cream); }
+  .collage .paw-badge{
+    position:absolute; z-index:3;
+    top:-22px; right:8%;
+    width:88px; height:88px;
+    background:var(--orange);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 12px 24px rgba(232,150,60,0.4);
+    transform:rotate(-8deg);
+  }
+  .collage .paw-badge svg{ width:42px; height:42px; }
+
+  @media(max-width:900px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .collage{ height:380px; margin-top:10px; }
+    .hero p.lead{ max-width:100%; }
+  }
+
+  /* service tags — pulled straight from the shop's real signage */
+  .services{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:#fff;
+  }
+  .services-row{
+    display:flex; justify-content:center; flex-wrap:wrap;
+    gap:0;
+    padding:26px 0;
+  }
+  .service-item{
+    display:flex; align-items:center; gap:12px;
+    padding:10px 36px;
+    border-right:1px solid var(--line);
+    font-weight:600; font-size:15px; color:var(--graphite-soft);
+  }
+  .service-item:last-child{ border-right:none; }
+  .service-item svg{ width:26px; height:26px; color:var(--green); }
+  @media(max-width:720px){
+    .service-item{ border-right:none; padding:8px 18px; width:50%; justify-content:flex-start; }
+  }
+
+  /* ---------- units section ---------- */
+  .units{ padding:100px 0 40px; }
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 64px; }
+  .section-head .eyebrow{ justify-content:center; }
+  .section-head h2{ font-size:clamp(32px,4vw,44px); margin-bottom:14px; }
+  .section-head p{ color:var(--graphite-soft); font-size:17px; line-height:1.6; }
+
+  .unit-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:36px;
+  }
+  @media(max-width:860px){ .unit-grid{ grid-template-columns:1fr; } }
+
+  .unit-card{
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 10px 30px rgba(50,57,63,0.06);
+  }
+  .unit-photo{ position:relative; height:230px; }
+  .unit-photo img{ width:100%; height:100%; object-fit:cover; }
+  .unit-tag{
+    position:absolute; top:18px; left:18px;
+    background:rgba(253,251,245,0.94);
+    padding:7px 16px; border-radius:30px;
+    font-weight:700; font-size:13px; letter-spacing:1px; text-transform:uppercase;
+  }
+  .unit-tag.aclimacao{ color:var(--brick); }
+  .unit-tag.belavista{ color:var(--green-deep); }
+
+  .unit-body{ padding:30px 30px 34px; }
+  .unit-body h3{ font-size:26px; margin-bottom:6px; }
+  .unit-addr{
+    display:flex; gap:10px; align-items:flex-start;
+    color:var(--graphite-soft); font-size:15.5px; line-height:1.5;
+    margin-bottom:8px;
+  }
+  .unit-addr svg{ width:18px; height:18px; flex-shrink:0; margin-top:2px; color:var(--orange-deep); }
+  .unit-phone{
+    display:flex; gap:10px; align-items:center;
+    color:var(--graphite-soft); font-size:15.5px;
+    margin-bottom:22px;
+  }
+  .unit-phone svg{ width:17px; height:17px; color:var(--orange-deep); }
+
+  .unit-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:22px; }
+  .unit-actions .btn{ padding:13px 20px; font-size:15px; border-radius:12px; }
+
+  .unit-map{
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    height:200px;
+  }
+  .unit-map iframe{ width:100%; height:100%; border:0; }
+
+  /* ---------- mural / carousel ---------- */
+  .mural{ padding:100px 0 90px; background:#fff; border-top:1px solid var(--line); }
+  .mural-carousel{ position:relative; }
+  .mural-track{
+    display:flex;
+    gap:18px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scroll-snap-type:x mandatory;
+    padding:6px 4px 22px;
+    cursor:grab;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scrollbar-color:var(--orange) transparent;
+  }
+  .mural-track.dragging{ cursor:grabbing; scroll-snap-type:none; }
+  .mural-track::-webkit-scrollbar{ height:6px; }
+  .mural-track::-webkit-scrollbar-thumb{ background:var(--orange); border-radius:10px; }
+  .mural-track img{
+    flex:0 0 auto;
+    width:250px; height:320px;
+    object-fit:cover;
+    border-radius:16px;
+    scroll-snap-align:start;
+    box-shadow:0 6px 18px rgba(50,57,63,0.1);
+    user-select:none;
+    -webkit-user-drag:none;
+  }
+  @media(max-width:600px){ .mural-track img{ width:200px; height:260px; } }
+
+  .mural-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:50px; height:50px; border-radius:50%;
+    background:#fff; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 20px rgba(50,57,63,0.14);
+    cursor:pointer; z-index:4;
+    transition:background .2s ease;
+  }
+  .mural-arrow:hover{ background:var(--orange); color:#fff; border-color:var(--orange); }
+  .mural-arrow svg{ width:22px; height:22px; }
+  .mural-arrow.prev{ left:-8px; }
+  .mural-arrow.next{ right:-8px; }
+  @media(max-width:760px){
+    .mural-arrow{ width:40px; height:40px; }
+    .mural-arrow.prev{ left:-4px; } .mural-arrow.next{ right:-4px; }
+  }
+
+  /* ---------- CTA strip ---------- */
+  .cta-strip{
+    margin:110px 0 0;
+    background:var(--graphite);
+    padding:70px 0;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .cta-strip h2{ color:#fff; font-size:clamp(28px,3.6vw,40px); margin-bottom:16px; }
+  .cta-strip p{ color:rgba(255,255,255,0.68); font-size:17px; margin-bottom:34px; }
+  .cta-strip .hero-ctas{ justify-content:center; }
+  .cta-strip .paw-scatter{ position:absolute; opacity:0.06; }
+
+  /* ---------- footer ---------- */
+  footer{ background:var(--graphite); color:#fff; padding:56px 0 30px; }
+  .footer-grid{
+    display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:40px;
+    padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  @media(max-width:760px){ .footer-grid{ grid-template-columns:1fr; gap:30px; } }
+  .footer-brand{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .footer-brand .logo-chip{ background:#fff; border-radius:8px; padding:4px 8px; display:flex; align-items:center; }
+  .footer-brand .logo-chip img{ height:30px; width:auto; display:block; }
+  .footer-brand .name{ font-family:'Fredoka'; font-weight:700; font-size:20px; }
+  .footer-brand .name span{ color:var(--green); }
+  footer p.tagline{ color:rgba(255,255,255,0.55); font-size:15px; max-width:280px; line-height:1.6; }
+  footer h4{ font-size:14px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:16px; }
+  footer .foot-addr{ font-size:15px; color:rgba(255,255,255,0.85); line-height:1.7; margin-bottom:16px; }
+  footer .foot-addr b{ display:block; color:#fff; font-weight:600; }
+  .foot-social{
+    display:inline-flex; align-items:center; gap:10px;
+    font-weight:600; font-size:15px;
+    padding:10px 20px; border:1.5px solid rgba(255,255,255,0.25); border-radius:30px;
+  }
+  .foot-social svg{ width:18px; height:18px; }
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:24px; font-size:13.5px; color:rgba(255,255,255,0.4);
+    flex-wrap:wrap; gap:10px;
+  }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img src="assets/logo-cropped.jpg" alt="Logo DedicaÇÃO Pet Shop">
+      <div class="name">Dedica<span>ÇÃO</span></div>
+    </div>
+    <nav class="nav-links">
+      <a href="#aclimacao">Unidade Aclimação</a>
+      <a href="#belavista">Unidade Bela Vista</a>
+    </nav>
+    <a class="insta" href="https://instagram.com/petshopdedicacao" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+      @petshopdedicacao
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">Bela Vista · Aclimação</div>
+      <h1>Uma bolinha de <em>pelo</em>,<br>amor e bagunça.</h1>
+      <p class="lead">Banho e tosa, acessórios e passeio — o mesmo cuidado de sempre, agora em dois cantos da cidade pra ficar mais perto do seu pet.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#aclimacao">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9Z"/></svg>
+          Ver as duas unidades
+        </a>
+        <a class="btn btn-outline" href="https://instagram.com/petshopdedicacao" target="_blank" rel="noopener">
+          Seguir no Instagram
+        </a>
+      </div>
+    </div>
+    <div class="collage">
+      <div class="p1 logo-card">
+        <img src="assets/logo-oficial.jpg" alt="Logo oficial DedicaÇÃO Pet Shop">
+      </div>
+      <img class="p2" src="assets/unidade-belavista.jpg" alt="Fachada da unidade Bela Vista">
+      <div class="paw-badge">
+        <svg viewBox="0 0 64 64" fill="#fff"><ellipse cx="32" cy="42" rx="16" ry="13"/><ellipse cx="14" cy="20" rx="7" ry="9"/><ellipse cx="30" cy="12" rx="7" ry="9"/><ellipse cx="47" cy="16" rx="7" ry="9"/><ellipse cx="56" cy="30" rx="6" ry="8"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap services-row">
+    <div class="service-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V6a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v3"/><path d="M4 9h16l-1.5 10.5a2 2 0 0 1-2 1.5H7.5a2 2 0 0 1-2-1.5L4 9Z"/></svg>
+      Banho e tosa
+    </div>
+    <div class="service-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9h16l-1 11H5L4 9Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+      Acessórios
+    </div>
+    <div class="service-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="6" r="3"/><path d="M5 21c1-4.5 4-7 7-7s6 2.5 7 7"/></svg>
+      Passeio
+    </div>
+  </div>
+</section>
+
+<section class="units">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Duas casas, um só cuidado</div>
+      <h2>Escolha a unidade mais perto de você</h2>
+      <p>Fale direto pelo WhatsApp com a unidade escolhida ou trace a rota até a loja.</p>
+    </div>
+
+    <div class="unit-grid">
+
+      <div class="unit-card reveal" id="aclimacao">
+        <div class="unit-photo">
+          <img src="assets/unidade-aclimacao.jpg" alt="Fachada da unidade Aclimação">
+          <span class="unit-tag aclimacao">Aclimação</span>
+        </div>
+        <div class="unit-body">
+          <h3>Unidade Aclimação</h3>
+          <div class="unit-addr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            Rua Castro Alves, 417 — Aclimação, São Paulo - SP
+          </div>
+          <div class="unit-phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 6-3 2a13 13 0 0 0 6 6l2-3 6 2v4a2 2 0 0 1-2 2C10.5 23 1 13.5 1 6a2 2 0 0 1 2-2Z"/></svg>
+            (11) 98270-8315
+          </div>
+          <div class="unit-actions">
+            <a class="btn btn-wa" href="https://wa.me/5511982708315" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.3c-.2.7-1.4 1.4-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1 0-1.5.8-2.2 1-2.5.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.2.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.2 2.4 1.5 2.7 1.7.3.2.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.9.3.1.5.2.5.3.1.2.1.6-.1 1.2Z"/></svg>
+              Chamar no WhatsApp
+            </a>
+            <a class="btn btn-map" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Castro+Alves+417+Aclima%C3%A7%C3%A3o+S%C3%A3o+Paulo" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3Z"/><path d="M9 3v15M15 6v15"/></svg>
+              Como chegar
+            </a>
+          </div>
+          <div class="unit-map">
+            <iframe loading="lazy" src="https://www.google.com/maps?q=Rua+Castro+Alves+417+Aclima%C3%A7%C3%A3o+S%C3%A3o+Paulo&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="unit-card reveal" id="belavista">
+        <div class="unit-photo">
+          <img src="assets/unidade-belavista.jpg" alt="Fachada da unidade Bela Vista">
+          <span class="unit-tag belavista">Bela Vista</span>
+        </div>
+        <div class="unit-body">
+          <h3>Unidade Bela Vista</h3>
+          <div class="unit-addr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            Rua Santa Madalena, 173 — Bela Vista, São Paulo - SP
+          </div>
+          <div class="unit-phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 6-3 2a13 13 0 0 0 6 6l2-3 6 2v4a2 2 0 0 1-2 2C10.5 23 1 13.5 1 6a2 2 0 0 1 2-2Z"/></svg>
+            (11) 94506-2319
+          </div>
+          <div class="unit-actions">
+            <a class="btn btn-wa" href="https://wa.me/5511945062319" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.3c-.2.7-1.4 1.4-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1 0-1.5.8-2.2 1-2.5.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.2.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.2 2.4 1.5 2.7 1.7.3.2.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.9.3.1.5.2.5.3.1.2.1.6-.1 1.2Z"/></svg>
+              Chamar no WhatsApp
+            </a>
+            <a class="btn btn-map" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Santa+Madalena+173+Bela+Vista+S%C3%A3o+Paulo" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3Z"/><path d="M9 3v15M15 6v15"/></svg>
+              Como chegar
+            </a>
+          </div>
+          <div class="unit-map">
+            <iframe loading="lazy" src="https://www.google.com/maps?q=Rua+Santa+Madalena+173+Bela+Vista+S%C3%A3o+Paulo&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="mural">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Banho &amp; tosa</div>
+      <h2>Mural dos peludinhos</h2>
+      <p>Cada lacinho e bandana é registro de um banho e tosa feito com carinho — dá uma olhada em quem já passou por aqui.</p>
+    </div>
+    <div class="mural-carousel reveal">
+      <button class="mural-arrow prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="mural-track" id="muralTrack">
+        <img src="assets/mural/pet-01.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-02.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-03.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-04.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-05.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-06.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-07.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-08.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-09.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-10.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-11.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-12.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-13.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-14.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-15.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-16.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-17.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-18.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+        <img src="assets/mural/pet-19.jpg" alt="Pet tosado na Dedicação Pet Shop" loading="lazy">
+      </div>
+      <button class="mural-arrow next" aria-label="Próximo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <div class="wrap reveal">
+    <h2>Agende o carinho do seu pet</h2>
+    <p>Chame a unidade mais perto pelo WhatsApp e já garanta o horário.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-wa" href="https://wa.me/5511982708315" target="_blank" rel="noopener">WhatsApp Aclimação</a>
+      <a class="btn btn-wa" href="https://wa.me/5511945062319" target="_blank" rel="noopener">WhatsApp Bela Vista</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="logo-chip"><img src="assets/logo-cropped.jpg" alt="Logo DedicaÇÃO Pet Shop"></span>
+          <div class="name">Dedica<span>ÇÃO</span> pet shop</div>
+        </div>
+        <p class="tagline">Uma bolinha de pelo, amor e bagunça — cuidando do seu pet em Bela Vista e Aclimação.</p>
+      </div>
+      <div>
+        <h4>Aclimação</h4>
+        <div class="foot-addr">
+          <b>Rua Castro Alves, 417</b>
+          (11) 98270-8315
+        </div>
+      </div>
+      <div>
+        <h4>Bela Vista</h4>
+        <div class="foot-addr">
+          <b>Rua Santa Madalena, 173</b>
+          (11) 94506-2319
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 DedicaÇÃO Pet Shop</span>
+      <a class="foot-social" href="https://instagram.com/petshopdedicacao" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        @petshopdedicacao
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.15 });
+  els.forEach(el=>io.observe(el));
+
+  // ---- mural carousel: drag to scroll, arrows, autoplay ----
+  const track = document.getElementById('muralTrack');
+  const prevBtn = document.querySelector('.mural-arrow.prev');
+  const nextBtn = document.querySelector('.mural-arrow.next');
+
+  function step(){
+    const card = track.querySelector('img');
+    return card ? card.offsetWidth + 18 : 260;
+  }
+  function atEnd(){ return track.scrollLeft + track.clientWidth >= track.scrollWidth - 4; }
+
+  nextBtn.addEventListener('click', ()=>{
+    pauseAutoplay();
+    if(atEnd()){ track.scrollTo({left:0, behavior:'smooth'}); }
+    else{ track.scrollBy({left: step(), behavior:'smooth'}); }
+    resumeAutoplayLater();
+  });
+  prevBtn.addEventListener('click', ()=>{
+    pauseAutoplay();
+    track.scrollBy({left: -step(), behavior:'smooth'});
+    resumeAutoplayLater();
+  });
+
+  // drag to scroll (mouse)
+  let isDown=false, startX=0, startScroll=0, dragged=false;
+  track.addEventListener('mousedown', (e)=>{
+    isDown=true; dragged=false;
+    track.classList.add('dragging');
+    startX = e.pageX; startScroll = track.scrollLeft;
+    pauseAutoplay();
+  });
+  window.addEventListener('mouseup', ()=>{
+    isDown=false; track.classList.remove('dragging');
+    resumeAutoplayLater();
+  });
+  window.addEventListener('mousemove', (e)=>{
+    if(!isDown) return;
+    e.preventDefault();
+    const dx = e.pageX - startX;
+    if(Math.abs(dx) > 5) dragged = true;
+    track.scrollLeft = startScroll - dx;
+  });
+  track.addEventListener('click', (e)=>{ if(dragged){ e.preventDefault(); } });
+
+  // touch: let native scrolling happen, just pause/resume autoplay
+  track.addEventListener('touchstart', pauseAutoplay, {passive:true});
+  track.addEventListener('touchend', resumeAutoplayLater, {passive:true});
+
+  // autoplay
+  let autoplayTimer=null, resumeTimer=null;
+  function startAutoplay(){
+    autoplayTimer = setInterval(()=>{
+      if(atEnd()){ track.scrollTo({left:0, behavior:'smooth'}); }
+      else{ track.scrollBy({left: step(), behavior:'smooth'}); }
+    }, 3000);
+  }
+  function pauseAutoplay(){
+    clearInterval(autoplayTimer);
+    clearTimeout(resumeTimer);
+  }
+  function resumeAutoplayLater(){
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(startAutoplay, 4000);
+  }
+  startAutoplay();
+</script>
+
+</body>
+</html>
