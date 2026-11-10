@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Cupons DedicaÇÃO</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#32393f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/cupom-config.js"></script>
+<style>
+  :root{
+    --cream:#fdfbf5; --graphite:#32393f; --graphite-soft:#5c646b;
+    --orange:#e8963c; --orange-deep:#cf7f28; --green:#7cb342; --green-deep:#649a2e;
+    --red:#b3261e; --line:rgba(50,57,63,0.12); --whatsapp:#25d366;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:'Work Sans',sans-serif; background:var(--cream); color:var(--graphite); -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Fredoka',sans-serif; font-weight:600; line-height:1.1; }
+  button, input, select{ font:inherit; }
+  .hidden{ display:none !important; }
+
+  header{ background:var(--graphite); color:#fff; }
+  .bar{ max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .bar .brand{ display:flex; align-items:center; gap:12px; }
+  .bar img{ height:38px; background:#fff; border-radius:10px; padding:4px 8px; }
+  .bar h1{ font-size:20px; }
+  .bar button{ background:transparent; color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:10px; padding:8px 14px; cursor:pointer; }
+
+  main{ max-width:1100px; margin:0 auto; padding:22px 20px 60px; }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px; box-shadow:0 6px 18px rgba(50,57,63,.05); }
+
+  /* login */
+  .login{ max-width:380px; width:calc(100% - 32px); margin:12vh auto 0; text-align:center; }
+  .login img{ width:150px; margin:0 auto 16px; display:block; }
+  .login h2{ font-size:26px; }
+  .login p{ color:var(--graphite-soft); margin-top:6px; }
+  .login form{ margin-top:18px; display:flex; flex-direction:column; gap:12px; }
+  input[type=password], input[type=text], select{ width:100%; padding:13px 14px; border:1.5px solid #d9ddd2; border-radius:12px; background:var(--cream); color:var(--graphite); font-size:16px; outline:none; }
+  input:focus, select:focus{ border-color:var(--green); box-shadow:0 0 0 3px rgba(124,179,66,.2); }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:46px; padding:0 18px; border:0; border-radius:12px; font-weight:700; cursor:pointer; text-decoration:none; }
+  .btn:disabled{ opacity:.6; cursor:wait; }
+  .btn-main{ background:var(--orange); color:#fff; }
+  .btn-green{ background:var(--green-deep); color:#fff; }
+  .btn-line{ background:#fff; color:var(--graphite); border:1.5px solid var(--line); }
+  .btn-danger{ background:#fff; color:var(--red); border:1.5px solid rgba(179,38,30,.3); }
+  .msg{ min-height:20px; font-size:14px; color:var(--red); }
+  .msg.ok{ color:var(--green-deep); }
+
+  /* stats */
+  .stats{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; }
+  .stat{ padding:16px; }
+  .stat .n{ font-family:'Fredoka',sans-serif; font-size:34px; font-weight:700; }
+  .stat .l{ font-size:13px; color:var(--graphite-soft); text-transform:uppercase; letter-spacing:.08em; font-weight:600; }
+  .stat.ativo .n{ color:var(--green-deep); } .stat.usado .n{ color:var(--orange-deep); } .stat.vencido .n{ color:var(--graphite-soft); }
+
+  /* caixa */
+  .caixa{ margin-top:16px; display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:start; }
+  .caixa h2{ font-size:22px; }
+  .caixa .sub{ color:var(--graphite-soft); font-size:14px; margin-top:4px; }
+  .row{ display:flex; gap:10px; margin-top:14px; }
+  .row input{ text-transform:uppercase; letter-spacing:.06em; font-weight:600; }
+  .result{ border-radius:16px; padding:16px; border:1.5px dashed var(--line); min-height:140px; display:flex; flex-direction:column; justify-content:center; }
+  .result .code{ font-family:'Fredoka',sans-serif; font-size:30px; font-weight:700; letter-spacing:.04em; }
+  .result .who{ margin-top:4px; color:var(--graphite-soft); }
+  .result .actions{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+  .placeholder{ color:var(--graphite-soft); text-align:center; font-size:14px; }
+
+  .pill{ display:inline-block; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:999px; }
+  .pill.ativo{ background:#e8f3db; color:var(--green-deep); }
+  .pill.usado{ background:#fbecd9; color:var(--orange-deep); }
+  .pill.vencido{ background:#eceeee; color:var(--graphite-soft); }
+
+  /* lista */
+  .list-head{ margin-top:22px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .list-head h2{ font-size:22px; margin-right:auto; }
+  .list-head input{ max-width:260px; }
+  .list-head select{ max-width:150px; }
+  table{ width:100%; border-collapse:collapse; margin-top:12px; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  th, td{ text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); font-size:14.5px; vertical-align:middle; }
+  th{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--graphite-soft); background:#fafaf6; }
+  tr:last-child td{ border-bottom:0; }
+  td.code{ font-weight:700; letter-spacing:.03em; white-space:nowrap; }
+  td .acts{ display:flex; gap:6px; justify-content:flex-end; }
+  td .acts .btn{ min-height:36px; padding:0 12px; font-size:13px; }
+  .empty{ text-align:center; color:var(--graphite-soft); padding:30px; }
+
+  @media (max-width: 760px){
+    .stats{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .caixa{ grid-template-columns:1fr; }
+    .list-head input, .list-head select{ max-width:none; flex:1 1 140px; }
+    table, thead, tbody, tr, td{ display:block; }
+    thead{ display:none; }
+    table{ border:0; background:transparent; }
+    tr{ background:#fff; border:1px solid var(--line); border-radius:16px; margin-bottom:10px; padding:6px 4px; }
+    td{ border:0; padding:6px 12px; }
+    td[data-l]::before{ content:attr(data-l) ": "; color:var(--graphite-soft); font-size:12px; text-transform:uppercase; letter-spacing:.06em; }
+    td .acts{ justify-content:flex-start; flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="vLogin" class="login card" style="margin-top:12vh">
+  <img src="/cupom/logo.png" alt="DedicaÇÃO Pet Shop">
+  <h2>Admin de cupons</h2>
+  <p>Entre com a senha da loja.</p>
+  <form id="fLogin">
+    <input type="password" id="senha" placeholder="Senha" autocomplete="current-password" aria-label="Senha">
+    <div class="msg" id="mLogin" role="alert"></div>
+    <button class="btn btn-main" type="submit">Entrar</button>
+  </form>
+</section>
+
+<!-- PAINEL -->
+<div id="vApp" class="hidden">
+  <header>
+    <div class="bar">
+      <div class="brand"><img src="/cupom/logo.png" alt=""><h1>Cupons</h1></div>
+      <button id="bSair" type="button">Sair</button>
+    </div>
+  </header>
+  <main>
+    <div class="stats">
+      <div class="card stat"><div class="n" id="sTotal">0</div><div class="l">Cadastros</div></div>
+      <div class="card stat ativo"><div class="n" id="sAtivo">0</div><div class="l">Ativos</div></div>
+      <div class="card stat usado"><div class="n" id="sUsado">0</div><div class="l">Usados</div></div>
+      <div class="card stat vencido"><div class="n" id="sVencido">0</div><div class="l">Vencidos</div></div>
+    </div>
+
+    <div class="caixa">
+      <div class="card">
+        <h2>Validar no caixa</h2>
+        <p class="sub">Digite o código que o cliente mostrou.</p>
+        <form class="row" id="fValidar">
+          <input type="text" id="cod" placeholder="DEDICA-XXXX" autocomplete="off" aria-label="Código do cupom">
+          <button class="btn btn-main" type="submit">Conferir</button>
+        </form>
+        <div class="msg" id="mValidar" role="status" style="margin-top:8px"></div>
+      </div>
+      <div class="result" id="rValidar"><div class="placeholder">O resultado aparece aqui.</div></div>
+    </div>
+
+    <div class="list-head">
+      <h2>Todos os cadastros</h2>
+      <input type="text" id="busca" placeholder="Buscar nome, WhatsApp ou código" aria-label="Buscar">
+      <select id="filtro" aria-label="Filtrar status">
+        <option value="">Todos</option>
+        <option value="ativo">Ativos</option>
+        <option value="usado">Usados</option>
+        <option value="vencido">Vencidos</option>
+      </select>
+      <button class="btn btn-line" id="bAtualizar" type="button">Atualizar</button>
+      <button class="btn btn-green" id="bCsv" type="button">Baixar planilha</button>
+    </div>
+    <table>
+      <thead><tr><th>Código</th><th>Nome</th><th>WhatsApp</th><th>Pegou em</th><th>Validade</th><th>Status</th><th></th></tr></thead>
+      <tbody id="tb"><tr><td colspan="7" class="empty">Carregando…</td></tr></tbody>
+    </table>
+  </main>
+</div>
+
+<script>
+(function(){
+  var API = window.CUPOM_API || "";
+  var $ = function(id){ return document.getElementById(id); };
+  var SENHA = "";
+  var dados = [];
+  try { SENHA = sessionStorage.getItem("dedica_admin") || ""; } catch(e){}
+
+  function chamar(corpo){
+    if (!API) return Promise.reject(new Error("O link do Apps Script ainda não foi configurado."));
+    corpo.senha = SENHA;
+    return fetch(API, { method:"POST", headers:{ "Content-Type":"text/plain;charset=utf-8" }, body: JSON.stringify(corpo) })
+      .then(function(r){ return r.json(); })
+      .then(function(res){ if (!res.ok) throw new Error(res.erro || "Erro"); return res; });
+  }
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function data(iso, hora){
+    if (!iso) return "—";
+    var d = new Date(iso); if (isNaN(d)) return "—";
+    var s = ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
+    if (hora) s += " " + ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+    return s;
+  }
+  function fone(w){
+    var d = String(w||"").replace(/\D/g,""); if (d.indexOf("55")===0 && d.length>11) d = d.slice(2);
+    return d.length>=10 ? "("+d.slice(0,2)+") "+d.slice(2,d.length-4)+"-"+d.slice(-4) : d;
+  }
+  function waLink(w){ var d = String(w||"").replace(/\D/g,""); if (d.indexOf("55")!==0) d = "55"+d; return "https://wa.me/"+d; }
+
+  // ---------- login ----------
+  function entrar(){
+    $("vLogin").classList.add("hidden"); $("vApp").classList.remove("hidden"); carregar();
+  }
+  $("fLogin").addEventListener("submit", function(e){
+    e.preventDefault();
+    SENHA = $("senha").value;
+    var b = this.querySelector("button"); b.disabled = true; $("mLogin").textContent = "";
+    chamar({ acao:"login" }).then(function(){
+      try { sessionStorage.setItem("dedica_admin", SENHA); } catch(e){}
+      entrar();
+    }).catch(function(err){ $("mLogin").textContent = err.message === "senha incorreta" ? "Senha incorreta." : err.message; })
+      .then(function(){ b.disabled = false; });
+  });
+  $("bSair").addEventListener("click", function(){
+    try { sessionStorage.removeItem("dedica_admin"); } catch(e){}
+    SENHA = ""; location.reload();
+  });
+
+  // ---------- lista ----------
+  function carregar(){
+    chamar({ acao:"listar" }).then(function(res){ dados = res.cupons || []; render(); })
+      .catch(function(err){
+        if (err.message === "senha incorreta") { $("bSair").click(); return; }
+        $("tb").innerHTML = '<tr><td colspan="7" class="empty">'+esc(err.message)+'</td></tr>';
+      });
+  }
+  function render(){
+    var c = {ativo:0, usado:0, vencido:0};
+    dados.forEach(function(x){ c[x.status] = (c[x.status]||0)+1; });
+    $("sTotal").textContent = dados.length; $("sAtivo").textContent = c.ativo; $("sUsado").textContent = c.usado; $("sVencido").textContent = c.vencido;
+    var q = $("busca").value.trim().toLowerCase(), qd = q.replace(/\D/g,""), f = $("filtro").value;
+    var lista = dados.filter(function(x){
+      if (f && x.status !== f) return false;
+      if (!q) return true;
+      return String(x.nome).toLowerCase().indexOf(q) >= 0 || String(x.codigo).toLowerCase().indexOf(q) >= 0 || (qd && String(x.whatsapp).indexOf(qd) >= 0);
+    });
+    if (!lista.length) { $("tb").innerHTML = '<tr><td colspan="7" class="empty">'+(dados.length ? "Nada encontrado." : "Nenhum cupom pego ainda.")+'</td></tr>'; return; }
+    $("tb").innerHTML = lista.map(function(x){
+      return '<tr>'+
+        '<td class="code">'+esc(x.codigo)+'</td>'+
+        '<td data-l="Nome">'+esc(x.nome)+'</td>'+
+        '<td data-l="WhatsApp"><a href="'+waLink(x.whatsapp)+'" target="_blank" rel="noopener">'+esc(fone(x.whatsapp))+'</a></td>'+
+        '<td data-l="Pegou em">'+data(x.criado_em, true)+'</td>'+
+        '<td data-l="Validade">'+data(x.expira_em)+'</td>'+
+        '<td><span class="pill '+esc(x.status)+'">'+esc(x.status)+'</span>'+(x.usado_em ? '<div style="font-size:12px;color:var(--graphite-soft);margin-top:4px">'+data(x.usado_em, true)+'</div>' : '')+'</td>'+
+        '<td><div class="acts">'+
+          (x.status === "ativo" ? '<button class="btn btn-green" data-usar="'+esc(x.codigo)+'">Marcar usado</button>' : '')+
+          '<button class="btn btn-danger" data-excluir="'+esc(x.codigo)+'" title="Excluir dados (pedido LGPD)">Excluir</button>'+
+        '</div></td></tr>';
+    }).join("");
+  }
+  $("busca").addEventListener("input", render);
+  $("filtro").addEventListener("change", render);
+  $("bAtualizar").addEventListener("click", carregar);
+
+  function usar(codigo){
+    return chamar({ acao:"usar", codigo:codigo }).then(function(){
+      dados.forEach(function(x){ if (x.codigo === codigo){ x.status = "usado"; x.usado_em = new Date().toISOString(); } });
+      render();
+    });
+  }
+  function excluir(codigo){
+    if (!confirm("Excluir todos os dados do cupom "+codigo+"? Isso não pode ser desfeito.")) return Promise.resolve(false);
+    return chamar({ acao:"excluir", codigo:codigo }).then(function(){
+      dados = dados.filter(function(x){ return x.codigo !== codigo; }); render(); return true;
+    });
+  }
+  $("tb").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    b.disabled = true;
+    var p = b.dataset.usar ? usar(b.dataset.usar) : excluir(b.dataset.excluir);
+    p.catch(function(err){ alert(err.message); }).then(function(){ b.disabled = false; });
+  });
+
+  // ---------- validar no caixa ----------
+  function mostrarResultado(x){
+    var info = x.status === "ativo" ? '<b style="color:var(--green-deep)">Pode aplicar 10% de desconto.</b>'
+             : x.status === "usado" ? '<b style="color:var(--orange-deep)">Já foi usado em '+data(x.usado_em, true)+'.</b>'
+             : '<b style="color:var(--red)">Venceu em '+data(x.expira_em)+'.</b>';
+    $("rValidar").innerHTML =
+      '<div><span class="pill '+esc(x.status)+'">'+esc(x.status)+'</span></div>'+
+      '<div class="code" style="margin-top:8px">'+esc(x.codigo)+'</div>'+
+      '<div class="who">'+esc(x.nome)+' · '+esc(fone(x.whatsapp))+' · válido até '+data(x.expira_em)+'</div>'+
+      '<div style="margin-top:8px">'+info+'</div>'+
+      (x.status === "ativo" ? '<div class="actions"><button class="btn btn-green" id="bUsarAgora" type="button">Marcar como usado</button></div>' : '');
+    var bu = $("bUsarAgora");
+    if (bu) bu.addEventListener("click", function(){
+      bu.disabled = true;
+      usar(x.codigo).then(function(){ x.status = "usado"; x.usado_em = new Date().toISOString(); mostrarResultado(x); $("mValidar").className = "msg ok"; $("mValidar").textContent = "Cupom marcado como usado."; })
+        .catch(function(err){ alert(err.message); bu.disabled = false; });
+    });
+  }
+  $("fValidar").addEventListener("submit", function(e){
+    e.preventDefault();
+    var c = $("cod").value.trim().toUpperCase().replace(/\s+/g, "");
+    if (c && c.indexOf("DEDICA-") !== 0) c = "DEDICA-" + c.replace(/^DEDICA/, "");
+    if (!c) return;
+    $("mValidar").className = "msg"; $("mValidar").textContent = "";
+    chamar({ acao:"consultar", codigo:c }).then(function(res){ mostrarResultado(res.cupom); })
+      .catch(function(err){ $("rValidar").innerHTML = '<div class="placeholder" style="color:var(--red)">'+esc(err.message === "cupom não encontrado" ? "Cupom "+c+" não encontrado." : err.message)+'</div>'; });
+  });
+
+  // ---------- exportar CSV ----------
+  $("bCsv").addEventListener("click", function(){
+    var cols = ["codigo","nome","whatsapp","criado_em","expira_em","status","usado_em","origem"];
+    var linhas = [cols.join(";")].concat(dados.map(function(x){
+      return cols.map(function(k){ var v = k.indexOf("_em")>0 ? data(x[k], true) : (k==="whatsapp" ? fone(x[k]) : x[k]); return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'; }).join(";");
+    }));
+    var blob = new Blob(["﻿"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+    a.download = "cupons-dedicacao-"+new Date().toISOString().slice(0,10)+".csv"; a.click();
+  });
+
+  if (SENHA) entrar();
+})();
+</script>
+</body>
+</html>
