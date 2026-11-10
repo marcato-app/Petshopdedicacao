@@ -110,7 +110,7 @@
   <img class="logo" src="logo.png" alt="DedicaÇÃO Pet Shop">
   <div class="kicker">Só na unidade Aclimação</div>
   <h1>Ganhe <span>10% OFF</span></h1>
-  <p>em todos os produtos do pet shop.<br>Pegue seu cupom em 10 segundos.</p>
+  <p>em todos os produtos do pet shop.<br><b>Exclusivo para novos clientes.</b> Pegue seu cupom em 10 segundos.</p>
 </header>
 
 <main class="wrap">
@@ -122,7 +122,7 @@
   <!-- Passo 1: formulário -->
   <section class="card" id="stepForm">
     <h2>Pegue seu cupom</h2>
-    <p class="sub">Preencha e receba um código pra apresentar no caixa.</p>
+    <p class="sub">Primeira vez na DedicaÇÃO? Preencha e receba um código pra apresentar no caixa.</p>
     <form id="form" novalidate>
       <label class="f">Seu nome
         <input type="text" id="nome" name="nome" autocomplete="given-name" placeholder="Ex.: Ana" required>
@@ -169,7 +169,7 @@
     </div>
   </section>
 
-  <p class="rules">Cupom de 10% válido por 7 dias a partir da emissão, somente na unidade Aclimação, em todos os produtos do pet shop. Uso único por cliente. Apresente o código no caixa.</p>
+  <p class="rules">Cupom de 10% exclusivo para novos clientes (primeira compra), válido por 7 dias a partir da emissão, somente na unidade Aclimação, em todos os produtos do pet shop. Uso único por cliente. Apresente o código no caixa.</p>
 </main>
 
 <footer><a href="/">petshopdedicacao.com.br</a></footer>
@@ -211,7 +211,7 @@
     $("ola").textContent = "Prontinho, " + c.nome + "!";
     $("code").textContent = c.codigo;
     $("valid").textContent = "Válido até " + fmtData(c.expira);
-    var msg = "Olá! Peguei meu cupom de 10% no site 🐾\n\n" +
+    var msg = "Olá! Sou cliente novo e peguei meu cupom de 10% no site 🐾\n\n" +
               "Código: " + c.codigo + "\n" +
               "Nome: " + c.nome + "\n" +
               "Válido até: " + fmtData(c.expira);
